@@ -2,7 +2,26 @@ import Header from "./components/Header";
 import useProducts from "./model/Products";
 
 function App() {
+<<<<<<< HEAD
   const { activeProducts, ...productService } = useProducts();
+=======
+  const [activePs, setActiveProducts] = useState([]);
+
+  const [ps, setProducts] = useState([
+    {id: 1, name: "kang"},
+    {id: 2, name: "li"}
+  ]);
+
+  useEffect(() => {
+    setProducts(sort(ps))
+  }, [])
+
+  useEffect(() => {
+    console.log("change")
+    setActiveProducts(ps)
+    console.log(activePs)
+  },[ps])
+>>>>>>> filter and get-all button by two useeffect
 
   const onProductAdd = () => {
     productService.addRandomProduct();
