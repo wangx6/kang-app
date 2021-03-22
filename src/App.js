@@ -1,47 +1,52 @@
+import Header from "./components/Header";
+import useProducts from "./model/Products";
 
-import { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer/Footer';
+function App() {
+  const { activeProducts, ...productService } = useProducts();
 
-function App({onhanle}) {
-  //state
-  const [ps, setProducts] = useState([
-    {
-      id: 11, name: 'sdfa'
-    },
-    {
-      id: 22, name: '6666'
-    }
-]);
-  const [message, setMessage] = useState('');
+  const onProductAdd = () => {
+    productService.addRandomProduct();
+  };
 
-  useEffect(() => {
-    console.log('asdasdfa');
-    return () => {
-      console.log('clean up');
-    }
-  },  []);
+  const onSelectedChange = (p) => {
+    productService.selectProduct(p);
+  };
 
-  const onClickAdd = () => {
-    setProducts([{id: Math.random().toString(32), name: '888888'}, ...ps]);
-  }
+  const onProductFilterByName = () => {
+    productService.fliterProductByName();
+  };
 
+  const onProductAll = () => {
+    productService.getAll();
+  };
 
-  // view space
+  const onProductsDelete = () => {
+    productService.deleteSelected();
+  };
+
   return (
-    <>
-      <div className="App">
-        <Header></Header>
-        <div>{ps.map(p =><div key={p.id}>
-            <div>{p.id}</div>
-            <div>{p.name}</div>
-          </div>)}
-        </div>
-
-        <button onClick={onClickAdd}>Add</button>
-        <Footer></Footer>
+    <div className="App">
+      <Header></Header>
+      <div>
+        {activeProducts.map((p) => (
+          <div key={p.id}>
+            <input
+              type="checkbox"
+              className="chk"
+              checked={p.selected}
+              onChange={() => onSelectedChange(p)}
+            ></input>
+            <label className="product">
+              {p.name} {p.id}
+            </label>
+          </div>
+        ))}
       </div>
-    </>
+      <button onClick={onProductAdd}>Add</button>
+      <button onClick={onProductFilterByName}>Filter By Kang</button>
+      <button onClick={onProductAll}>Get all</button>
+      <button onClick={onProductsDelete}>Delete By Checkbox</button>
+    </div>
   );
 }
 
