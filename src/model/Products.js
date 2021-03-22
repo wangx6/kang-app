@@ -15,7 +15,6 @@ const fetchProducts = () => {
 }
 
 const useProducts = () => {
-  // STATE_
   const [activeProducts, setActiveProducts] = useState([]);
   const [ps, setProducts] = useState([]);
 
