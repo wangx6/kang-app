@@ -10,6 +10,10 @@ function App() {
   ]);
 
   useEffect(() => {
+    setProducts(sort(ps))
+  }, [])
+
+  useEffect(() => {
     console.log("change")
     setActiveProducts(ps)
     console.log(activePs)
