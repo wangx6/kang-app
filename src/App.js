@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Header from "./components/Header";
 import useProducts from "./model/Products";
 
@@ -52,27 +53,43 @@ function App() {
   };
 =======
     const boxes = document.getElementsByClassName('chk')
+=======
+import Header from './components/Header';
+import useProducts from './model/Products';
 
-    let checkedId = []
-    for(var i = 0; i < boxes.length; i++){
-      const box = boxes[i];
-      if (box.checked) {
-        checkedId.push(parseInt(box.id))
-      }
-    }
-    setProducts(ps.filter( (p) => !checkedId.includes(p.id)))
+function App() {
+  const { activeProducts, ...productService } = useProducts()
+
+  const onProductAdd = () => {
+    productService.addRandomProduct()
   }
 
+  const onSelectedChange = (p) => {
+    productService.selectProduct(p)
+  }
+>>>>>>> custom hook
+
+  const onProductFilterByName = () => {
+    productService.fliterProductByName()
+  }
+
+<<<<<<< HEAD
   const sort = (array) => array.sort((a, b) =>
     b.id - a.id
   )
 >>>>>>> delete button
+=======
+  const onProductAll = () => {
+    productService.getAll()
+  }
+>>>>>>> custom hook
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  const onProductsDelete = () => {
+    productService.deleteSelected()
   }
 
   return (
+<<<<<<< HEAD
 <<<<<<< HEAD
     <div className="App">
       <Header></Header>
@@ -107,6 +124,17 @@ function App() {
         <button onClick={onProductAll}>Get all</button>
         <button onClick={onProductsDelete}>Delete By Checkbox</button>
 >>>>>>> delete button
+=======
+    <div className="App">
+      <Header></Header>
+      <div>
+        {activeProducts.map( p => 
+          <div key={p.id}>
+            <input type="checkbox" className='chk' checked={p.selected} onChange={() => onSelectedChange(p)}></input>
+            <label className='product'>{p.name} {p.id}</label>
+          </div>
+        )}
+>>>>>>> custom hook
       </div>
       <button onClick={onProductAdd}>Add</button>
       <button onClick={onProductFilterByName}>Filter By Kang</button>
