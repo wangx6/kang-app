@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Header from "./components/Header";
 import useProducts from "./model/Products";
 
@@ -56,22 +57,31 @@ function App() {
 =======
 import Header from './components/Header';
 import useProducts from './model/Products';
+=======
+import Header from "./components/Header";
+import useProducts from "./model/Products";
+>>>>>>> format
 
 function App() {
-  const { activeProducts, ...productService } = useProducts()
+  const { activeProducts, ...productService } = useProducts();
 
   const onProductAdd = () => {
-    productService.addRandomProduct()
-  }
+    productService.addRandomProduct();
+  };
 
   const onSelectedChange = (p) => {
+<<<<<<< HEAD
     productService.selectProduct(p)
   }
 >>>>>>> custom hook
+=======
+    productService.selectProduct(p);
+  };
+>>>>>>> format
 
   const onProductFilterByName = () => {
-    productService.fliterProductByName()
-  }
+    productService.fliterProductByName();
+  };
 
 <<<<<<< HEAD
   const sort = (array) => array.sort((a, b) =>
@@ -80,13 +90,18 @@ function App() {
 >>>>>>> delete button
 =======
   const onProductAll = () => {
+<<<<<<< HEAD
     productService.getAll()
   }
 >>>>>>> custom hook
+=======
+    productService.getAll();
+  };
+>>>>>>> format
 
   const onProductsDelete = () => {
-    productService.deleteSelected()
-  }
+    productService.deleteSelected();
+  };
 
   return (
 <<<<<<< HEAD
@@ -128,13 +143,24 @@ function App() {
     <div className="App">
       <Header></Header>
       <div>
-        {activeProducts.map( p => 
+        {activeProducts.map((p) => (
           <div key={p.id}>
-            <input type="checkbox" className='chk' checked={p.selected} onChange={() => onSelectedChange(p)}></input>
-            <label className='product'>{p.name} {p.id}</label>
+            <input
+              type="checkbox"
+              className="chk"
+              checked={p.selected}
+              onChange={() => onSelectedChange(p)}
+            ></input>
+            <label className="product">
+              {p.name} {p.id}
+            </label>
           </div>
+<<<<<<< HEAD
         )}
 >>>>>>> custom hook
+=======
+        ))}
+>>>>>>> format
       </div>
       <button onClick={onProductAdd}>Add</button>
       <button onClick={onProductFilterByName}>Filter By Kang</button>
