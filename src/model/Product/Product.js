@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const Product = () => {
+const Product = (product) => {
   //state space is
   let products = [];
 
@@ -11,9 +11,9 @@ const Product = () => {
     return await axios.get(url);
   }
   // api space
-  return {
-    fetchProducts
-  };
+  return (
+    <div>{product.id} {product.name}</div>
+  )
 };
 
 export default Product;

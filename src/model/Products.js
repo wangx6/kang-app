@@ -71,6 +71,10 @@ const useProducts = () => {
     setProducts(ps.filter((p) => !p.selected));
   };
 
+  const getProductById = (pId) => {
+    return activeProducts.filter((p) => p.id === pId);
+  };
+
   //api
   return {
     activeProducts,
@@ -79,6 +83,7 @@ const useProducts = () => {
     fliterProductByName,
     getAll,
     deleteSelected,
+    getProductById,
   };
 };
 
