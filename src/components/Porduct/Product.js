@@ -1,11 +1,23 @@
 import { useParams } from "react-router";
-import useProducts from "../../model/Products";
 import React from "react";
+import useProducts from "../../model/Products";
+import { Link } from "react-router-dom";
 
 function Product() {
+  const { pId } = useParams();
   const { getProductById } = useProducts();
-  let { pId } = useParams();
-  console.log(pId);
-  return <div>{getProductById(pId)} xxhello</div>;
+  const product = getProductById(pId)[0];
+
+  console.log(product);
+
+  return (
+      <>
+    <div>
+      xxhello
+      {/* <h1>{product.name}xxx</h1> */}
+    </div>
+    <div><Link to='/'>Go back to product</Link></div>
+    </>
+  );
 }
 export default Product;

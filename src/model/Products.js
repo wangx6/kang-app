@@ -72,7 +72,7 @@ const useProducts = () => {
   };
 
   const getProductById = (pId) => {
-    return activeProducts.filter((p) => p.id === pId);
+    return activeProducts.filter((p) => p.id === parseInt(pId));
   };
 
   //api
