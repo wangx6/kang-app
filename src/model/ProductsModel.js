@@ -1,4 +1,9 @@
-import { useState, useEffect } from "react";
+/* eslint-disable */
+import React, { useState, useEffect } from "react";
+import { createContext } from "react";
+import PropTypes from "react";
+
+export const ProductsContext = createContext();
 
 const initProduct = [
   { id: 1, name: "kang", selected: false },
@@ -8,27 +13,15 @@ const initProduct = [
   { id: 8, name: "yy", selected: false },
 ];
 
-const fetchAll = () => {
-  return new Promise((resolve) => {
-    resolve(initProduct);
-  });
-};
-
-const useProducts = () => {
+const ProductsModel = props => {
   //state
   const [activeProducts, setActiveProducts] = useState([]);
   const [ps, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState({});
 
-  //power
-  useEffect(() => {
-    fetchAll().then((result) => {
-      result = _sortById(result);
-      setProducts(result);
-    });
-  }, []);
 
   useEffect(() => {
-    setActiveProducts(ps);
+    
     // console.log('hjere')
     // console.log(activeProducts)
   }, [ps]);
@@ -46,6 +39,14 @@ const useProducts = () => {
     ]);
   };
 
+  const fetchAll = () => {
+    return new Promise((resolve) => {
+      resolve(initProduct);
+    });
+  };
+
+  const fetchById = pid => new Promise(resolve => resolve(initProduct.find(p => p.id === parseInt(pid))));
+
   const selectProduct = (product) => {
     setProducts(
       ps.map((p) => {
@@ -55,7 +56,7 @@ const useProducts = () => {
     );
   };
 
-  const fliterProductByName = () => {
+  const filterProductByName = () => {
     setActiveProducts(
       ps.filter((p) => {
         return p.name.includes("kang");
@@ -72,19 +73,30 @@ const useProducts = () => {
   };
 
   const getProductById = (pId) => {
-    return activeProducts.filter((p) => p.id === parseInt(pId));
+    return activeProducts.find(p => p.id === parseInt(pId));
   };
 
-  //api
-  return {
-    activeProducts,
-    addRandomProduct,
-    selectProduct,
-    fliterProductByName,
-    getAll,
-    deleteSelected,
-    getProductById,
-  };
+  return (
+    <ProductsContext.Provider
+      value={{
+        activeProducts,
+        selectedProduct,
+        service: {
+          fetchAll,
+          fetchById,
+          addRandomProduct,
+          selectProduct,
+          filterProductByName,
+          getAll,
+          deleteSelected,
+          getProductById,
+        },
+      }}
+    >
+      {props.children}
+    </ProductsContext.Provider>
+  );
+
 };
 
-export default useProducts;
+export default ProductsModel;

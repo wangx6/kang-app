@@ -1,9 +1,26 @@
-import React from "react";
-import useProducts from "../../model/Products";
+import React,  { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ProductsContext } from '../../model/ProductsModel';
 
 const Products = () => {
-  const { activeProducts, ...productService } = useProducts();
+  // state space
+  const [products, setProducts] = useState([]);
+  const { service: productService } = useContext(ProductsContext);
+
+  // controller space (event)
+  useEffect(onRender, []);
+  
+  function onRender() {
+    productService.fetchAll().then(res => {
+      setProducts(res);
+    });  
+    return onDestroy;
+  }
+
+  function onDestroy() {
+    console.log('destroy...');
+  }
+
   const onProductAdd = () => {
     productService.addRandomProduct();
   };
@@ -24,10 +41,11 @@ const Products = () => {
     productService.deleteSelected();
   };
 
+  // view space
   return (
     <div className="App">
       <div>
-        {activeProducts.map((p) => (
+        {products.map((p) => (
           <div key={p.id}>
             <input
               type="checkbox"
