@@ -17,7 +17,7 @@ function Product() {
     productService.fetchById(pid).then(res =>{
       setProduct(res);
     });
-  });
+  }, []);
 
   // view space
   return (
