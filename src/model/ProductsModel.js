@@ -8,32 +8,26 @@ const initProduct = [
   { id: 8, name: "yy", selected: false },
 ];
 
-const fetchAll = () => {
-  return new Promise((resolve) => {
-    resolve(initProduct);
-  });
-};
-
-const useProducts = () => {
+const ProductsModel = () => {
   //state
   const [activeProducts, setActiveProducts] = useState([]);
   const [ps, setProducts] = useState([]);
 
   //power
   useEffect(() => {
-    fetchAll().then((result) => {
-      result = _sortById(result);
-      setProducts(result);
-    });
-  }, []);
-
-  useEffect(() => {
     setActiveProducts(ps);
-    // console.log('hjere')
-    // console.log(activeProducts)
   }, [ps]);
 
   const _sortById = (product) => product.sort((d1, d2) => d1.id - d2.id);
+
+  const fetchAll = () => {
+    new Promise((resolve) => {
+      resolve(initProduct);
+    }).then((result) => {
+      result = _sortById(result);
+      setProducts(result);
+    });
+  };
 
   const addRandomProduct = () => {
     setProducts([
@@ -55,7 +49,7 @@ const useProducts = () => {
     );
   };
 
-  const fliterProductByName = () => {
+  const filterProductByName = () => {
     setActiveProducts(
       ps.filter((p) => {
         return p.name.includes("kang");
@@ -72,19 +66,28 @@ const useProducts = () => {
   };
 
   const getProductById = (pId) => {
-    return activeProducts.filter((p) => p.id === parseInt(pId));
+    return activeProducts.find((p) => p.id === parseInt(pId));
   };
+
+  const fetchProductById = (pId) =>
+    new Promise((resolve) =>
+      resolve(initProduct.find((p) => p.id === parseInt(pId)))
+    );
 
   //api
   return {
     activeProducts,
-    addRandomProduct,
-    selectProduct,
-    fliterProductByName,
-    getAll,
-    deleteSelected,
-    getProductById,
+    service: {
+      addRandomProduct,
+      selectProduct,
+      filterProductByName: filterProductByName,
+      getAll,
+      deleteSelected,
+      getProductById,
+      fetchProductById,
+      fetchAll,
+    },
   };
 };
 
-export default useProducts;
+export default ProductsModel;

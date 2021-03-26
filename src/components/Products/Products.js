@@ -1,9 +1,21 @@
-import React from "react";
-import useProducts from "../../model/Products";
+import React, { useEffect } from "react";
+import ProductsModel from "../../model/ProductsModel";
 import { Link } from "react-router-dom";
 
 const Products = () => {
-  const { activeProducts, ...productService } = useProducts();
+  // state space
+  const { activeProducts, service: productService } = ProductsModel();
+
+  // controller space (event)
+  useEffect(() => {
+    render();
+    return destroy();
+  }, []);
+
+  const render = () => productService.fetchAll();
+
+  const destroy = () => console.log("Destroying Products Page");
+
   const onProductAdd = () => {
     productService.addRandomProduct();
   };
@@ -13,7 +25,7 @@ const Products = () => {
   };
 
   const onProductFilterByName = () => {
-    productService.fliterProductByName();
+    productService.filterProductByName();
   };
 
   const onProductAll = () => {
@@ -24,6 +36,7 @@ const Products = () => {
     productService.deleteSelected();
   };
 
+  // view space
   return (
     <div className="App">
       <div>
