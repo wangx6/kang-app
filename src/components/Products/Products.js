@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ProductsModelContext } from "../../model/ProductsModel";
+import { UserContext } from "../../model/UserModel";
 import { Link } from "react-router-dom";
 
 const Products = () => {
@@ -7,6 +8,7 @@ const Products = () => {
   const { activeProducts, service: productService } = useContext(
     ProductsModelContext
   );
+  const { user } = useContext(UserContext);
 
   // controller space
   useEffect(() => {
@@ -36,6 +38,7 @@ const Products = () => {
   // view space
   return (
     <div className="App">
+      <h1>Hi User {user.email}</h1>
       <div>
         {activeProducts.map((p) => (
           <div key={p.id}>

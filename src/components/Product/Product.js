@@ -2,10 +2,12 @@ import { useParams, useHistory } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { ProductsModelContext } from "../../model/ProductsModel";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../model/UserModel";
 
 function Product() {
   // state space
   const { service: productsService } = useContext(ProductsModelContext);
+  const { user } = useContext(UserContext);
   const { pId } = useParams();
   const history = useHistory();
   const [product, setProduct] = useState({});
@@ -17,7 +19,7 @@ function Product() {
 
   const onClickName = () => {
     setTimeout(() => {
-      history.push({ pathname: "/" });
+      history.push({ pathname: "/products" });
     }, 1000);
   };
 
@@ -25,10 +27,11 @@ function Product() {
   return (
     <>
       <div>
+        <h1>Hi User {user.name}</h1>
         <h1 onClick={onClickName}>{product.name}</h1>
       </div>
       <div>
-        <Link to="/">Go back to product</Link>
+        <Link to="/products">Go back to product</Link>
       </div>
     </>
   );
