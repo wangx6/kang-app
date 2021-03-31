@@ -1,6 +1,6 @@
 import { useParams, useHistory } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
-import { ProductsModelContext } from "../../model/ProductsModel";
+import { ProductsModelContext } from "../../model/ProductsModel/ProductsModel";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../model/UserModel";
 

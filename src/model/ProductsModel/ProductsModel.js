@@ -100,7 +100,7 @@ const ProductsModel = (props) => {
 };
 
 ProductsModel.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.any,
 };
 
 export default ProductsModel;

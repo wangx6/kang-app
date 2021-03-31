@@ -6,7 +6,7 @@ import UserLogin from "./components/UserLogin/UserLogin";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 // Context
-import ProductsModel from "./model/ProductsModel";
+import ProductsModel from "./model/ProductsModel/ProductsModel";
 import UserModel from "./model/UserModel";
 
 function App() {
