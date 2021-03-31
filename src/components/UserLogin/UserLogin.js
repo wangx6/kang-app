@@ -2,7 +2,10 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router";
 import { UserContext } from "../../model/UserModel";
 
-const UserLogin = () => {
+const UserLogin = (props) => {
+
+  console.log('llllllllllll');
+  console.log(props);
   // state space
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

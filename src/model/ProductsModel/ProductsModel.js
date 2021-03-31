@@ -12,7 +12,7 @@ const initProduct = [
 
 export const ProductsModelContext = React.createContext();
 
-const ProductsModel = (props) => {
+export const ProductsModel = () => {
   //state
   const [activeProducts, setActiveProducts] = useState([]);
   const [ps, setProducts] = useState([]);
@@ -78,29 +78,34 @@ const ProductsModel = (props) => {
       resolve(initProduct.find((p) => p.id === parseInt(pId)))
     );
 
+  return {
+    activeProducts,
+    service: {
+      addRandomProduct,
+      selectProduct,
+      filterProductByName,
+      getAll,
+      deleteSelected,
+      getProductById,
+      fetchProductById,
+      fetchAll,
+    },
+  }
+};
+
+const ProductProvider = (props) => {
+  const productModel = ProductsModel();
   return (
     <ProductsModelContext.Provider
-      value={{
-        activeProducts,
-        service: {
-          addRandomProduct,
-          selectProduct,
-          filterProductByName,
-          getAll,
-          deleteSelected,
-          getProductById,
-          fetchProductById,
-          fetchAll,
-        },
-      }}
+      value={productModel}
     >
       {props.children}
     </ProductsModelContext.Provider>
-  );
-};
+  )
+}
 
-ProductsModel.propTypes = {
+ProductProvider.propTypes = {
   children: PropTypes.any,
 };
 
-export default ProductsModel;
+export default ProductProvider;
