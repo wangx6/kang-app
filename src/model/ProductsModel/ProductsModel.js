@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import PropTypes from "prop-types";
-
-const initProduct = [
-  { id: 1, name: "kang", selected: false },
-  { id: 2, name: "xx", selected: false },
-  { id: 0, name: "zz", selected: false },
-  { id: 9, name: "ee", selected: false },
-  { id: 8, name: "yy", selected: false },
-];
+import axios from 'axios';
 
 export const ProductsModelContext = React.createContext();
 
@@ -22,16 +15,9 @@ export const ProductsModel = () => {
     setActiveProducts(ps);
   }, [ps]);
 
-  const fetchAll = () => {
-    return new Promise((resolve) => {
-      resolve(initProduct);
-    }).then((res) => {
-      res = _sortById(res);
-      setProducts(res);
-    });
+  const fetchAll = async () => {
+    return await axios.get('https://jsonplaceholder.typicode.com/users');
   };
-
-  const _sortById = (product) => product.sort((d1, d2) => d1.id - d2.id);
 
   const addRandomProduct = () => {
     setProducts([
@@ -75,7 +61,7 @@ export const ProductsModel = () => {
 
   const fetchProductById = (pId) =>
     new Promise((resolve) =>
-      resolve(initProduct.find((p) => p.id === parseInt(pId)))
+      resolve(ps.find((p) => p.id === parseInt(pId)))
     );
 
   return {
@@ -89,6 +75,7 @@ export const ProductsModel = () => {
       getProductById,
       fetchProductById,
       fetchAll,
+      setProducts,
     },
   }
 };

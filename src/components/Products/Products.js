@@ -12,7 +12,11 @@ const Products = () => {
 
   // controller space
   useEffect(() => {
-    productService.fetchAll();
+      const fetchAll = async () => {
+      const res = await productService.fetchAll();
+      productService.setProducts(res.data);
+    }
+    fetchAll();
   }, []);
 
   const onProductAdd = () => {
