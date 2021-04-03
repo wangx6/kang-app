@@ -108,4 +108,30 @@ describe("ProductsModel Test", () => {
     expected = m.activeProducts.find(p => p.id === testData.id);
     expect(expected).toEqual(undefined);
   });
+
+  it("getAll", () => {
+    // verify activeProducts is empty at init stage
+    expect(m.activeProducts.length).toEqual(0);
+
+    // set the products 
+    run(m.service.setProducts, mockData.data);
+
+    // run getAll
+    run(m.service.getAll);
+
+    // check if active products is the same as the products
+    expect(m.activeProducts).toEqual(m.products);
+
+    // set active products to be different
+    run(m.service.setActiveProducts, [testData]);
+
+    // verify if the products length is now the same as the reset product length
+    expect(m.activeProducts.length).toEqual(1);
+
+    // invoke "getAll" again
+    run(m.service.getAll);
+
+    // verify if active products is the same to the products
+    expect(m.activeProducts).toEqual(m.products);
+  });
 });
