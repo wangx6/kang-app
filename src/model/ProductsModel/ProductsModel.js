@@ -52,7 +52,7 @@ export const ProductsModel = () => {
   };
 
   const deleteSelected = () => {
-    setProducts(ps.filter((p) => !p.selected));
+    setProducts(ps.filter(p => !p.selected));
   };
 
   const getProductById = (pId) => {
