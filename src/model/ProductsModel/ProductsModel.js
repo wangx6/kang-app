@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import PropTypes from "prop-types";
-import axios from 'axios';
+import axios from "axios";
 
 export const ProductsModelContext = React.createContext();
 
@@ -16,7 +16,7 @@ export const ProductsModel = () => {
   }, [ps]);
 
   const fetchAll = async () => {
-    return await axios.get('https://jsonplaceholder.typicode.com/users');
+    return await axios.get("https://jsonplaceholder.typicode.com/users");
   };
 
   const addRandomProduct = () => {
@@ -56,13 +56,11 @@ export const ProductsModel = () => {
   };
 
   const getProductById = (pId) => {
-    return activeProducts.find((p) => p.id === parseInt(pId));
+    return activeProducts.find((p) => p.id === pId);
   };
 
   const fetchProductById = (pId) =>
-    new Promise((resolve) =>
-      resolve(ps.find((p) => p.id === parseInt(pId)))
-    );
+    new Promise((resolve) => resolve(ps.find((p) => p.id === parseInt(pId))));
 
   return {
     activeProducts,
@@ -77,19 +75,17 @@ export const ProductsModel = () => {
       fetchAll,
       setProducts,
     },
-  }
+  };
 };
 
 const ProductProvider = (props) => {
   const productModel = ProductsModel();
   return (
-    <ProductsModelContext.Provider
-      value={productModel}
-    >
+    <ProductsModelContext.Provider value={productModel}>
       {props.children}
     </ProductsModelContext.Provider>
-  )
-}
+  );
+};
 
 ProductProvider.propTypes = {
   children: PropTypes.any,

@@ -12,10 +12,10 @@ const Products = () => {
 
   // controller space
   useEffect(() => {
-      const fetchAll = async () => {
+    const fetchAll = async () => {
       const res = await productService.fetchAll();
       productService.setProducts(res.data);
-    }
+    };
     fetchAll();
   }, []);
 
