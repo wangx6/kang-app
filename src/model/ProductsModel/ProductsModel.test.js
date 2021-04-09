@@ -42,10 +42,10 @@ beforeAll(() => {
 // UTIL FUNCTION FOR INVOKING "ACT" FUNCTION
 const run = (setFn, args) => {
   act(() => setFn(args));
-}
+};
 
 beforeEach(() => {
-  // clear productS
+  // clear products
   act(() => m.service.setProducts([]));
 
   // RESET MOCK DATA
@@ -57,7 +57,7 @@ beforeEach(() => {
       testData,
     ],
   };
-})
+});
 
 /* ############  ENTERPRISE ENGAGE ################ */
 describe("ProductsModel Test", () => {
@@ -82,7 +82,7 @@ describe("ProductsModel Test", () => {
   it("select product", () => {
     run(m.service.setProducts, mockData.data);
     run(m.service.selectProduct, testData);
-    const expected = m.activeProducts.find(p => p.id === testData.id);
+    const expected = m.activeProducts.find((p) => p.id === testData.id);
     expect(expected.selected).toEqual(true);
   });
 
@@ -101,11 +101,11 @@ describe("ProductsModel Test", () => {
   it("deleteSelected", () => {
     run(m.service.setProducts, mockData.data);
     run(m.service.selectProduct, testData);
-    let expected = m.activeProducts.find(p => p.id === testData.id);
+    let expected = m.activeProducts.find((p) => p.id === testData.id);
     expect(expected.selected).toEqual(true);
 
     run(m.service.deleteSelected);
-    expected = m.activeProducts.find(p => p.id === testData.id);
+    expected = m.activeProducts.find((p) => p.id === testData.id);
     expect(expected).toEqual(undefined);
   });
 
@@ -113,7 +113,7 @@ describe("ProductsModel Test", () => {
     // verify activeProducts is empty at init stage
     expect(m.activeProducts.length).toEqual(0);
 
-    // set the products 
+    // set the products
     run(m.service.setProducts, mockData.data);
 
     // run getAll

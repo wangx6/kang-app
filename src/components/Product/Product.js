@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { ProductsModelContext } from "../../model/ProductsModel/ProductsModel";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../model/UserModel";
+import { UserContext } from "../../model/UserModel/UserModel";
 
 function Product() {
   // state space
@@ -27,7 +27,7 @@ function Product() {
   return (
     <>
       <div>
-        <h1>Hi User {user.name}</h1>
+        <h1>Hi User {user.email}</h1>
         <h1 onClick={onClickName}>{product.name}</h1>
       </div>
       <div>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ProductsModelContext } from "../../model/ProductsModel/ProductsModel";
-import { UserContext } from "../../model/UserModel";
+import { UserContext } from "../../model/UserModel/UserModel";
 import { Link } from "react-router-dom";
 
 const Products = () => {
