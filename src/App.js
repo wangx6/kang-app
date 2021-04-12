@@ -6,11 +6,10 @@ import UserLogin from "./components/UserLogin/UserLogin";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 // Context
-import ProductsModel from "./model/ProductsModel";
-import UserModel from "./model/UserModel";
+import ProductsModel from "./model/ProductsModel/ProductsModel";
+import UserModel from "./model/UserModel/UserModel";
 
 function App() {
-
   return (
     <Router>
       <Switch>

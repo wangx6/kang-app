@@ -1,20 +1,23 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router";
-import { UserContext } from "../../model/UserModel";
+import { UserContext } from "../../model/UserModel/UserModel";
 
 const UserLogin = () => {
   // state space
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const { service: userService } = useContext(UserContext);
+  const { isAuth, service: userService } = useContext(UserContext);
 
   // controller space
   const onFormSubmit = (event) => {
     event.preventDefault();
-    userService
-      .validateUser(email, password)
-      .then((isValid) => _isValidUser(isValid));
+    const validUser = async () => {
+      const user = await userService.getUser(email);
+      userService.validateUser(user.data, password);
+      _isValidUser(isAuth);
+    };
+    validUser();
   };
 
   const _isValidUser = (isValid) => {

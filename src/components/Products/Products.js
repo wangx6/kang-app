@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { ProductsModelContext } from "../../model/ProductsModel";
-import { UserContext } from "../../model/UserModel";
+import { ProductsModelContext } from "../../model/ProductsModel/ProductsModel";
+import { UserContext } from "../../model/UserModel/UserModel";
 import { Link } from "react-router-dom";
 
 const Products = () => {
@@ -12,7 +12,11 @@ const Products = () => {
 
   // controller space
   useEffect(() => {
-    productService.fetchAll();
+    const fetchAll = async () => {
+      const res = await productService.fetchAll();
+      productService.setProducts(res.data);
+    };
+    fetchAll();
   }, []);
 
   const onProductAdd = () => {
